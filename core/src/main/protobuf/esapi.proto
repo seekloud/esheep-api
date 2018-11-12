@@ -1,8 +1,99 @@
-
 syntax = "proto3";
 
 
 package org.seekloud.esheepapi.pb;
+
+
+message RequestMsg {
+  int32 id = 1;
+  oneof request_body {
+
+
+  }
+}
+
+
+message ResponseMsg {
+  int32 id = 1;
+  int32 err_code = 2;
+  State state = 3;
+  oneof response_body {
+
+  }
+  string msg = 99;
+}
+
+
+
+enum State{
+
+}
+
+
+// request bodies.
+//---------------------------------------------
+message CreateRoomReq {
+
+}
+
+
+message JoinRoomReq {
+
+}
+
+
+message ActionReq {
+
+}
+
+message ObservationReq {
+
+}
+
+
+message InfoReq {
+
+}
+
+
+message LeaveRoomReq {
+
+}
+
+
+
+//response bodies.
+//---------------------------------------------
+message EmptyRsp {
+
+}
+
+
+message CreateRoomRsp {
+
+}
+
+message ActionRsp {
+
+}
+
+
+message ObservationRsp {
+
+}
+
+
+message InfoRsp {
+
+}
+
+
+
+
+
+
+
+
 
 message Person {
   int32 id = 1;
