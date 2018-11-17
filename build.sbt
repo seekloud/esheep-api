@@ -24,7 +24,9 @@ lazy val core =
       parallelExecution in Test := false,
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest" % "3.0.5" % "test",
-        "com.google.protobuf" % "protobuf-java" % "3.6.1"
+        "ch.qos.logback" % "logback-classic" % "1.2.3",
+        "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,
+        "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion
       ))
     .settings(
       PB.targets in Compile := Seq(
