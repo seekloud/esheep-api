@@ -17,6 +17,7 @@ syntax = "proto3";
 
 package org.seekloud.esheepapi.pb;
 
+
 /*
     * 视野在整个地图中的位置
     * 视野内不可交互的元素（地图背景元素）
