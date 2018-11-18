@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package org.seekloud.esheepapi.pb;
+
+
+import "api.proto";
+import "actions.proto";
+import "observations.proto";
+
+
+
+service EsheepAgent {
+
+
+
+
+  rpc createRoom(Credit) returns (SimpleRsp) {}
+
+  rpc joinRoom(JoinRoomReq) returns (SimpleRsp) {}
+
+  rpc leaveRoom(Credit) returns (SimpleRsp) {}
+
+  rpc actionSpace(Credit) returns (ActionSpaceRsp) {}
+
+  rpc sendAction(ActionReq) returns (ActionRsp) {}
+
+  rpc getObservation(Credit) returns (ObservationRsp) {}
+
+  rpc askInform(Credit) returns (InformRsp) {}
+
+
+
+
+
+
+
+
+
+}
