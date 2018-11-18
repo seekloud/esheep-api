@@ -15,8 +15,15 @@
 
 syntax = "proto3";
 
-import "protobuf/actions.proto";
-import "protobuf/observations.proto";
+import "actions.proto";
+import "observations.proto";
+
+//import "protobuf/actions.proto";
+//import "protobuf/observations.proto";
+//
+//
+//import "core/src/main/protobuf/actions.proto";
+//import "core/src/main/protobuf/observations.proto";
 
 
 package org.seekloud.esheepapi.pb;
