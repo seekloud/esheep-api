@@ -20,27 +20,22 @@ syntax = "proto3";
 package org.seekloud.esheepapi.pb;
 
 
-
-
-message Move{
-
+enum Move {
+  up = 0;
+  down = 1;
+  left = 2;
+  right = 3;
+  l_up = 4;
+  r_up = 5;
+  l_down = 6;
+  r_down = 7;
 }
 
 
-message Swing{
-
+message Swing {
+  float radian = 1;
+  float distance = 2;
 }
-
-
-message Fire{
-
-}
-
-
-message Apply{
-
-}
-
 
 
 

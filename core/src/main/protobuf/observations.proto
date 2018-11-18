@@ -13,18 +13,44 @@
 //  limitations under the License.
 
 
-
-
 syntax = "proto3";
 
 package org.seekloud.esheepapi.pb;
 
+/*
+    * 视野在整个地图中的位置
+    * 视野内不可交互的元素（地图背景元素）
+    * 视野内可交互的元素（物品、道具、子弹等）
+    * 视野内包括自己的所有玩家
+    * 视野内的自己
+    * 面板状态信息图层
+*/
 
+message LayeredObservation {
 
+  ImgData location_in_map = 1;
+  ImgData background = 2;
+  ImgData things = 3;
+  ImgData players = 4;
+  ImgData self_player = 5;
+  ImgData states = 6;
 
-message ImgData{
 
 }
+
+
+message ImgData {
+
+  int32 width = 1;
+  int32 height = 2;
+  int32 pixel_length = 3; //by byte
+  bytes data = 4;
+
+}
+
+
+
+
 
 
 
