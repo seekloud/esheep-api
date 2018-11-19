@@ -49,10 +49,10 @@ object EsheepDemoServer {
 
 
 class EsheepService() extends EsheepAgent {
-  override def createRoom(request: Credit): Future[SimpleRsp] = {
+  override def createRoom(request: Credit): Future[CreateRoomRsp] = {
     println(s"createRoom Called by [$request")
     val state = State.init_game
-    Future.successful(SimpleRsp(errCode = 101, state = state, msg = "ok"))
+    Future.successful(CreateRoomRsp(errCode = 101, state = state, msg = "ok"))
   }
 
   override def joinRoom(request: JoinRoomReq): Future[SimpleRsp] = {

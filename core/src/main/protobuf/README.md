@@ -72,7 +72,28 @@
 
 
 
+### sbt 配置 (可以参考本工程的配置)
+1. 在project目录下创建文件:scalapb.sbt
+2. 编辑文件scalapb.sbt内容为:
+```
+addSbtPlugin("com.thesamet" % "sbt-protoc" % "0.99.19")
 
+libraryDependencies += "com.thesamet.scalapb" %% "compilerplugin" % "0.8.2"
+```
+3. 在build.sbt文件中增加以下依赖:
+```
+        "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,
+        "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion
+```
+4. 在build.sbt文件的工程设置中增加:
+```
+      PB.targets in Compile := Seq(
+        scalapb.gen() -> (sourceManaged in Compile).value
+      )
+```
+5. 在`src/main/protobuf`路径下编写*.proto文件;
+6. 进入sbt交互模式，输入 `protocGenerate` 即可生成proto文件对应的scala文件；
+7. 生成的文件在 `./target/scala-2.12/src_managed/main`，这些生成的文件，无需拷贝到src目录下，在项目代码中直接就可以使用;
 
 
 

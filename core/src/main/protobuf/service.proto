@@ -9,7 +9,7 @@ import "api.proto";
 service EsheepAgent {
 
 
-  rpc createRoom (Credit) returns (SimpleRsp);
+  rpc createRoom (Credit) returns (CreateRoomRsp);
 
   rpc joinRoom (JoinRoomReq) returns (SimpleRsp);
 
