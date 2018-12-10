@@ -1,7 +1,7 @@
 package org.seekloud.esheepapi
 
 import io.grpc.{ManagedChannel, ManagedChannelBuilder}
-import org.seekloud.esheepapi.pb.api.{Credit, ObservationRsp, SimpleRsp}
+import org.seekloud.esheepapi.pb.api.{CreateRoomRsp, Credit, ObservationRsp, SimpleRsp}
 import org.seekloud.esheepapi.pb.service.EsheepAgentGrpc
 import org.seekloud.esheepapi.pb.service.EsheepAgentGrpc.EsheepAgentStub
 
@@ -27,7 +27,7 @@ class EsheepDemoClient(
   val credit = Credit(playerId = playerId, apiToken = apiToken)
 
 
-  def createRoom(): Future[SimpleRsp] = esheepStub.createRoom(credit)
+  def createRoom(): Future[CreateRoomRsp] = esheepStub.createRoom(credit)
 
   def observation(): Future[ObservationRsp] = esheepStub.observation(credit)
 }

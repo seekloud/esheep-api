@@ -1,7 +1,6 @@
 package org.seekloud.esheepapi
 
 import io.grpc.{Server, ServerBuilder, ServerServiceDefinition}
-import org.seekloud.esheepapi.pb.hello.{GreeterGrpc, HelloReply, HelloRequest}
 
 import scala.concurrent.{ExecutionContext, Future}
 import io.grpc.{Server, ServerBuilder}
