@@ -53,17 +53,6 @@
     * 通常对应于键盘的E，F，1，2，3，4等辅助操作；
 
 
-1. aaaa
-    1. dddd
-        * kkkk
-        * jjjj
-    2. ddd 
-    3. dddd
-  
-2. a2222
-3. a3333
-
-
 ### 观察数据 (Observation)
 1. 分层视图  
 
