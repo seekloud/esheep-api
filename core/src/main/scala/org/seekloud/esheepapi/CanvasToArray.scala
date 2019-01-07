@@ -33,33 +33,51 @@ class CanvasToArray extends javafx.application.Application{
 		val width = canvas.getWidth.toInt
 		val height = canvas.getHeight.toInt
 		val writableImage = new WritableImage(width, height)
-		val bufferedImage = new BufferedImage(width, width, 2)
 		canvas.snapshot(params, writableImage) //从画布将图片转化为writableImage
-		SwingFXUtils.fromFXImage(writableImage, bufferedImage) //将writableImage的数据倒入bufferedImage中
+//				val bufferedImage = new BufferedImage(width, width, 2)
+//				SwingFXUtils.fromFXImage(writableImage, bufferedImage) //将writableImage的数据倒入bufferedImage中
 		
 		/**
 			* getRGB最后一个参数是指每行扫描的像素点数。如果想获得原图，直接填入width即可。
 			* 填入其他值x，会导致图片每行只取前x个值。
 			* 在一个Int内从高到低，每8位分别存的是A、R、G、B，0-255的值
 			*/
-		val argb = bufferedImage.getRGB(0, 0, width, height, null, 0, width)
+//				val argb = bufferedImage.getRGB(0, 0, width, height, null, 0, width)
+
+//				argb.foreach { e => byteBuffer.putInt(e) }
 		
 		/**
 			* allocate内表示buffer内最多存多少个Byte，byteBuffer本身有三个指针：
-			* 	pos: 表示当下一个数据到来时应该被注入的位置，初始为0
-			* 	lim: 表示在输出模式下时，输出的末尾位置，初始等于allocate里的大小。
-			* 	cap: 表示buffer总长，初始等于allocate里的大小
+			* pos: 表示当下一个数据到来时应该被注入的位置，初始为0
+			* lim: 表示在输出模式下时，输出的末尾位置，初始等于allocate里的大小。
+			* cap: 表示buffer总长，初始等于allocate里的大小
 			*
 			* 保证线程安全的情况下，可以不每次重新开buffer，记得clear就行。
 			*/
-		val byteBuffer = ByteBuffer.allocate(4 * 200 * 200)
-		// byteBuffer.clear()
-		argb.foreach { e =>
-			byteBuffer.putInt(e)
+			
+		val isGray = false
+		val reader = writableImage.getPixelReader
+		
+		if(!isGray) {
+			//获取彩图，每个像素点4Byte
+			val byteBuffer = ByteBuffer.allocate(4 * width * height)
+			byteBuffer.clear()
+			for (y <- 0 until height; x <- 0 until width) {
+				val color = reader.getArgb(x, y)
+				byteBuffer.putInt(color)
+			}
+			byteBuffer.flip() //翻转，修改lim为当前pos，pos置0
+			val arrayOfByte = byteBuffer.array().take(byteBuffer.limit) //take前limit个Byte，去除Buffer内余下的多余数据
+			ByteString.copyFrom(arrayOfByte)
+		} else {
+			//获取灰度图，每个像素点1Byte
+			val byteArray = new Array[Byte](1 * width * height)
+			for (y <- 0 until height; x <- 0 until width) {
+				val color = reader.getColor(x, y).grayscale()
+				val gray = (color.getRed * 255).toByte
+				byteArray(y * height + x) = gray
+			}
+			ByteString.copyFrom(byteArray)
 		}
-		byteBuffer.flip() //翻转，修改lim为当前pos，pos置0
-		val arrayOfByte = byteBuffer.array().take(byteBuffer.limit) //take前limit个Byte，去除Buffer内余下的多余数据
-		print(arrayOfByte.toList)
-		ByteString.copyFrom(arrayOfByte)
 	}
 }
