@@ -36,6 +36,7 @@ message LayeredObservation {
   ImgData asset_ownership = 5;
   ImgData self_asset = 6;
   ImgData self_status = 7;
+  ImgData pointer = 8;
 
 }
 
