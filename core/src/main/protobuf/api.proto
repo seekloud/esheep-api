@@ -110,6 +110,14 @@ message ActionSpaceRsp {
   string msg = 15;
 }
 
+message SystemInfoRsp {
+  int32 frameRate = 1;
+
+  int32 err_code = 13;
+  State state = 14;
+  string msg = 15;
+}
+
 
 message SimpleRsp{
   int32 err_code = 13;
