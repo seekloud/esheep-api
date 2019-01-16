@@ -1,7 +1,8 @@
 package org.seekloud.esheepapi
 
+import io.grpc.stub.StreamObserver
 import io.grpc.{ManagedChannel, ManagedChannelBuilder}
-import org.seekloud.esheepapi.pb.api.{CreateRoomRsp, Credit, ObservationRsp, SimpleRsp}
+import org.seekloud.esheepapi.pb.api._
 import org.seekloud.esheepapi.pb.service.EsheepAgentGrpc
 import org.seekloud.esheepapi.pb.service.EsheepAgentGrpc.EsheepAgentStub
 
@@ -24,17 +25,20 @@ class EsheepDemoClient(
 
   private val esheepStub: EsheepAgentStub = EsheepAgentGrpc.stub(channel)
 
-  val credit = Credit(playerId = playerId, apiToken = apiToken)
+  private val esBlockingStub = EsheepAgentGrpc.blockingStub(channel)
+
+  val credit = Credit(apiToken = apiToken)
 
 
-  def createRoom(): Future[CreateRoomRsp] = esheepStub.createRoom(credit)
+  def createRoom(): Future[CreateRoomRsp] = esheepStub.createRoom(CreateRoomReq(Some(credit)))
 
   def observation(): Future[ObservationRsp] = esheepStub.observation(credit)
+
+  def testStream(req: StreamRq): Iterator[StreamRsp] = esBlockingStub.testStream(req)
 }
 
 
-
-object EsheepDemoClient{
+object EsheepDemoClient {
 
 
   def main(args: Array[String]): Unit = {
@@ -46,10 +50,12 @@ object EsheepDemoClient{
     val apiToken = "lala"
 
     val client = new EsheepDemoClient(host, port, playerId, apiToken)
+    println("client begin.")
 
-    val rsp1 = client.createRoom()
+/*    val rsp1 = client.createRoom()
 
     val rsp2 = client.observation()
+
 
     println("--------  begin sleep   ----------------")
     Thread.sleep(10000)
@@ -58,7 +64,14 @@ object EsheepDemoClient{
     println(rsp1)
     println("------------------------")
     println(rsp2)
-    println("client DONE.")
+    println("client DONE.")*/
+
+
+    val rsp3 = client.testStream(StreamRq("helloStream"))
+    for( d <- rsp3){
+      println(s"i got $d")
+    }
+
 
   }
 }

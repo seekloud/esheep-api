@@ -1,6 +1,4 @@
 
-
-
 lazy val baseSettings = Seq(
   version := "0.0.1-SNAPSHOT",
   scalaVersion := "2.12.7",
@@ -12,6 +10,9 @@ lazy val baseSettings = Seq(
   resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
   javacOptions ++= Seq("-encoding", "UTF-8")
 )
+
+
+
 
 
 lazy val core =
@@ -26,7 +27,8 @@ lazy val core =
         "org.scalatest" %% "scalatest" % "3.0.5" % "test",
         "ch.qos.logback" % "logback-classic" % "1.2.3",
         "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,
-        "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion
+        "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
+        "com.typesafe.akka" %% "akka-actor" % "2.5.19"
       ))
     .settings(
       PB.targets in Compile := Seq(

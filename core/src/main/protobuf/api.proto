@@ -144,3 +144,12 @@ message SimpleRsp{
   State state = 14;
   string msg = 15;
 }
+
+message StreamRq{
+  string msg = 1;
+}
+
+message StreamRsp{
+  int32 data = 1;
+}
+

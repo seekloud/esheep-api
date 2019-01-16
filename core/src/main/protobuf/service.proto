@@ -31,4 +31,6 @@ service EsheepAgent {
 
   rpc reincarnation (Credit) returns (SimpleRsp);
 
+  rpc testStream(StreamRq) returns (stream StreamRsp);
+
 }
