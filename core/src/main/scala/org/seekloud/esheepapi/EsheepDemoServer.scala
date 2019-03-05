@@ -49,7 +49,7 @@ object EsheepDemoServer {
 
 
 class EsheepService() extends EsheepAgent {
-  override def createRoom(request: Credit): Future[CreateRoomRsp] = {
+  override def createRoom(request: CreateRoomReq): Future[CreateRoomRsp] = {
     println(s"createRoom Called by [$request")
     val state = State.init_game
     Future.successful(CreateRoomRsp(errCode = 101, state = state, msg = "ok"))
@@ -88,6 +88,30 @@ class EsheepService() extends EsheepAgent {
   override def inform(request: Credit): Future[InformRsp] = {
     println(s"action Called by [$request")
     val rsp = InformRsp()
+    Future.successful(rsp)
+  }
+  
+  override def currentFrame(request: Credit): Future[CurrentFrameRsp] = {
+    println(s"action Called by [$request")
+    val rsp = CurrentFrameRsp()
+    Future.successful(rsp)
+  }
+  
+  override def observationWithInfo(request: Credit): Future[ObservationWithInfoRsp] = {
+    println(s"action Called by [$request")
+    val rsp = ObservationWithInfoRsp()
+    Future.successful(rsp)
+  }
+  
+  override def reincarnation(request: Credit): Future[SimpleRsp] = {
+    println(s"action Called by [$request")
+    val rsp = SimpleRsp()
+    Future.successful(rsp)
+  }
+  
+  override def systemInfo(request: Credit): Future[SystemInfoRsp] = {
+    println(s"action Called by [$request")
+    val rsp = SystemInfoRsp()
     Future.successful(rsp)
   }
 }
