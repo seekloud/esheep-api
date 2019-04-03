@@ -32,20 +32,26 @@ enum State {
 }
 
 
-
 message Credit{
   string api_token = 1;
+}
+
+message ApiConf{
+  float img_rate = 1;
+  bool need_human = 2;
+  repeated int32 ignore_human = 3;
 }
 
 message CreateRoomReq{
   Credit credit = 1;
   string password = 2;
   string room_name = 3;
+  string room_config = 4;   //地图大小，帧率， 机器人数量等级以及是否锁定等信息
+  ApiConf api_conf = 5;
 }
 
 message CreateRoomRsp {
   string room_id = 1;
-
   int32 err_code = 13;
   State state = 14;
   string msg = 15;
@@ -56,6 +62,11 @@ message JoinRoomReq {
   Credit credit = 1;
   string password = 2;
   string room_id = 3;
+  ApiConf api_conf = 4;
+}
+
+message JoinRoomRsp{
+  ApiConf api_conf = 1;  //如果锁定发锁定的apiConf， 否则发JoinRoom时的conf
 }
 
 
@@ -104,7 +115,6 @@ message InformRsp {
   int32 score = 1;
   int32 kills = 2;
   int32 heath = 3;
-
   int64 frame_index = 12;
   int32 err_code = 13;
   State state = 14;
