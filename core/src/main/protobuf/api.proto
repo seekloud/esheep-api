@@ -66,7 +66,10 @@ message JoinRoomReq {
 }
 
 message JoinRoomRsp{
-  ApiConf api_conf = 1;  //如果锁定发锁定的apiConf， 否则发JoinRoom时的conf
+  ApiConf api_conf = 1;
+  int32 err_code = 13;
+  State state = 14;
+  string msg = 15;//如果锁定发锁定的apiConf， 否则发JoinRoom时的conf
 }
 
 
