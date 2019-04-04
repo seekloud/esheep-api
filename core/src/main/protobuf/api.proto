@@ -39,7 +39,7 @@ message Credit{
 message ApiConf{
   float img_rate = 1;
   bool need_human = 2;
-  repeated int32 ignore_human = 3;
+  repeated int32 ignore_layer = 3;
 }
 
 message CreateRoomReq{
