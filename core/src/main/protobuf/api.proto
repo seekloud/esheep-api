@@ -49,6 +49,7 @@ message CreateRoomReq{
   string room_name = 3;
   string room_config = 4;   //地图大小，帧率， 机器人数量等级以及是否锁定等信息
   ApiConf api_conf = 5;
+  string server_ip = 6;
 }
 
 message CreateRoomRsp {
@@ -64,6 +65,7 @@ message JoinRoomReq {
   string password = 2;
   string room_id = 3;
   ApiConf api_conf = 4;
+  string server_ip = 5;
 }
 
 message JoinRoomRsp{
