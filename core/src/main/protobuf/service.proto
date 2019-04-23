@@ -11,7 +11,7 @@ service EsheepAgent {
 
   rpc createRoom (CreateRoomReq) returns (CreateRoomRsp);
 
-  rpc joinRoom (JoinRoomReq) returns (SimpleRsp);
+  rpc joinRoom (JoinRoomReq) returns (JoinRoomRsp);
 
   rpc leaveRoom (Credit) returns (SimpleRsp);
 
